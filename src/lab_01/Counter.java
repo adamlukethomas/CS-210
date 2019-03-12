@@ -31,7 +31,6 @@ public class Counter implements Runnable  {
 
 	public Counter (String name){
 		threadName = name;
-		new Thread(this, getName()).start();
 	}
 		
 	private String getName() {
@@ -40,7 +39,7 @@ public class Counter implements Runnable  {
 	protected void setName(String name) {
 		threadName = name;
 	}
-	protected int getValue() {
+	public static int getValue() {
 		return tally;
 	}
 	protected void setValue(int i) {
@@ -53,10 +52,12 @@ public class Counter implements Runnable  {
 		System.out.println(getName() + ": started");
 		
 		for(int i=0; i<=10000000; i++) {
-			setValue(i);
+			
+			int current = getValue();
+			setValue(current = current + 1);
 		}
 	
-		System.out.println(this.getName() + ": " + getValue());
+		//System.out.println(this.getName() + ": " + getValue());
 		
 	}
 	

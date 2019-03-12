@@ -40,12 +40,33 @@ public class Demo_01 {
 	public static void main(String[] args) {
 
 		ExtendsMyThread extended = new ExtendsMyThread("EXTENDED_THREAD_1");
-
 		ImplementsRunnable runnable = new ImplementsRunnable("RUNNABLE_THREAD_2");
 
 		Counter counter = new Counter("COUNTER_THREAD_3");
 		Counter counter2 = new Counter("COUNTER_THREAD_4");
 
+
+		Thread counterone = new Thread(counter);
+		Thread countertwo = new Thread(counter2);
+		
+		
+		counterone.start();
+		countertwo.start();
+		
+		
+		try {
+			counterone.join();
+			countertwo.join();
+			
+			//join is waiting for both of these threads to finish up before 'completeing'?
+		} catch (Exception e) {
+			
+		}
+		
+		//get value now pulling a single static value from Counter
+		System.out.println(Counter.getValue());
+		
+		
 	}
 
 }
